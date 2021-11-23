@@ -5,7 +5,6 @@ WORKDIR /app
 
 # We need the Gemfile quite early.
 COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
 
 # Install required dependencies.
 RUN apt-get update -qq
@@ -16,11 +15,6 @@ RUN apt-get install -y \
 # Developers are ultimately gonna install these anyway.
 RUN apt-get install -y vim
 
-# Install rails.
-RUN gem install rails -v 5.2.3
-
-# Debug...
-RUN ruby -v
 
 # Install Bundler fixed to 2.2.1
 # Apparently it can mimick projects that need bundler v1.
@@ -28,7 +22,6 @@ RUN ruby -v
 RUN gem install bundler:2.2.1
 
 # Install from Gemfile.
-RUN bundle update
 RUN bundle check || bundle install
 
 # Copy the project files to /app in the container.
