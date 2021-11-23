@@ -28,7 +28,8 @@ RUN ruby -v
 RUN gem install bundler:2.2.1
 
 # Install from Gemfile.
-RUN bundle install
+RUN bundle update
+RUN bundle check || bundle install
 
 # Copy the project files to /app in the container.
 COPY . /app/
