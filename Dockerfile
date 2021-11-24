@@ -5,16 +5,13 @@ WORKDIR /app
 
 # We need the Gemfile quite early.
 COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
 
 # Install required dependencies.
 RUN apt-get update -qq
 RUN apt-get install -y \
     build-essential \
     sqlite3 
-
-# Developers are ultimately gonna install these anyway.
-RUN apt-get install -y vim
-
 
 # Install Bundler fixed to 2.2.1
 # Apparently it can mimick projects that need bundler v1.
